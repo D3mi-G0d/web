@@ -43,12 +43,12 @@
 								<div class="spotlight">
 									<div class="content">
 										<header class="major">
-											<h2>Welcome!</h2>
+											<h2 id="welcome">Welcome!</h2>
 										</header>
 										<p align="justify"><strong>. C . O . D . E . </strong> calls on to the programmers, for the very first time, to solve challenging, algorithmic puzzles against the clock. Contestants advance through five <i>online-hosted</i> levels of increasing difficulties to be at the top of the leaderboard!
 											<br><br> Come join us and walk right into it, you will learn the unwritten rules of the game as you play harder and get better.</p>
 										<ul class="actions">
-											<li><a href="registration.html" class="button">Register Now!</a></li>
+											<li><a href="registration.html" class="button" id="primary-action">Register Now!</a></li>
 										</ul>
 									</div>
 									<span class="image"><img src="images/home3.png" alt="" /></span>
@@ -96,6 +96,18 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->  
+			<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+			<script src="/__/firebase/7.14.2/firebase-app.js"></script>
 
+			<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+			<script src="/__/firebase/7.14.2/firebase-analytics.js"></script>
+
+			<!-- Add Firebase products that you want to use -->
+			<script src="/__/firebase/7.14.2/firebase-auth.js"></script>
+			<!-- Initialize Firebase -->
+			<script src="/__/firebase/init.js"></script>
+			<!-- Core  modules -->
+			<script src="assets/js/core/init.js"></script>
 	</body>
 </html>

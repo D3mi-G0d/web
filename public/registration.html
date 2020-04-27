@@ -40,8 +40,11 @@
                                                 <h2>Register</h2>
                                             </center>
                                         </header>
-                         <!-- Form -->
-									<section>
+						 <!-- Form -->
+										<div id="login-container">
+										
+										</div>
+									<!-- <section>
 										<h2>Form</h2>
 										<form method="post" action="#">
 											<div class="row gtr-uniform">
@@ -63,7 +66,7 @@
 												</div>
 											</div>
 										</form>
-									</section>
+									</section> -->
   
 									</div>
 								</div>
@@ -110,6 +113,23 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->  
+		<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+		<script src="/__/firebase/7.14.2/firebase-app.js"></script>
+
+		<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+		<script src="/__/firebase/7.14.2/firebase-analytics.js"></script>
+
+		<!-- Add Firebase products that you want to use -->
+		<script src="/__/firebase/7.14.2/firebase-auth.js"></script>
+		<!-- Initialize Firebase -->
+		<script src="/__/firebase/init.js"></script>
+		<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+		<!-- Core  modules -->
+		<script src="assets/js/core/init.js"></script>
+		<script src="assets/js/core/auth.js"></script>
 
 </body>
 </html>
