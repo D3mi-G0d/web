@@ -21,7 +21,7 @@ firebase.auth().onAuthStateChanged(function(user)
 		{
 			window.location.href = '/verify';
 		}
-		else if(window.location.pathname == '/verify') window.location.href = '/rules';
+		else if(user.emailVerified && window.location.pathname == '/verify') window.location.href = '/rules';
 	}
 	else
 	{

@@ -1,3 +1,6 @@
+
+
+
 function loginUI()
 {
 	if(firebase.auth().currentUser) window.close();
@@ -50,8 +53,8 @@ if(loginbttn)
 function verifyMail()
 {
 	let user = firebase.auth().currentUser;
-	if(!user) window.location.href = '/registration';
-	else
+	console.log(user)
+	if(user)
 	{
 		if(user.emailVerified)
 		{
@@ -76,8 +79,9 @@ function verifyMail()
 	}
 }
 
+firebase.auth().onAuthStateChanged(function(user)
+{
+	if(window.location.pathname == '/verify') verifyMail();
+});
 
 if(window.location.pathname == '/accounts') loginUI();
-
-
-
