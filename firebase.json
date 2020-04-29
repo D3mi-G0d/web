@@ -23,6 +23,9 @@
     },
     "hosting": {
       "port": 5000
+    },
+    "database": {
+      "port": 9000
     }
   },
   "firestore": {
