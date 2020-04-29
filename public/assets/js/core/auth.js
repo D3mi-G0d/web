@@ -1,8 +1,9 @@
-if(window.location.pathname == '/accounts.html')
+function loginUI()
 {
+	if(firebase.auth().currentUser) window.close();
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
 	ui.start('#login-container', {
-		signInSuccessUrl: '/rules.html',
+		signInSuccessUrl: '/rules',
 		callbacks: {
 			'signInSuccessWithAuthResult': function(authResult, redirectUrl) {
 			if (window.opener) {
@@ -18,6 +19,8 @@ if(window.location.pathname == '/accounts.html')
 							})
 						}
 					}
+					else
+						window.close();
 					// The widget has been opened in a popup, so close the window
 					// and return false to not redirect the opener.
 					return false;
@@ -47,12 +50,12 @@ if(loginbttn)
 function verifyMail()
 {
 	let user = firebase.auth().currentUser;
-	if(!user) window.location.href = '/registration.html';
+	if(!user) window.location.href = '/registration';
 	else
 	{
 		if(user.emailVerified)
 		{
-			window.location.href = '/rules.html';
+			window.location.href = '/rules';
 		}
 		else
 		{
@@ -72,3 +75,9 @@ function verifyMail()
 		}
 	}
 }
+
+
+if(window.location.pathname == '/accounts') loginUI();
+
+
+

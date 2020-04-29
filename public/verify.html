@@ -42,9 +42,6 @@
 						<li><a href="rules.html">Rules</a></li>
 						<li><a href="about-us.html">About</a></li>
 					</ul>
-					<ul class="icons" id="acnav">
-						<li><a href="#" class="icon solid solo fa-sign-in-alt" onClick="window.open('/accounts.html', 'Sign In', 'width=600,height=600');"><span class="label">Sign In</span></a></li>
-					</ul>
 				</nav>
 
 				<!-- Main -->
@@ -59,9 +56,9 @@
 								
 								<a href="#" class="image main"><img style="width: 35%; margin: auto;" src="images/IMGBIN_email-marketing-advertising-simple-mail-transfer-protocol-affiliate-marketing-png_DLqqcFhp.png" alt="" /></a>
                                 <br>
-                                <p style="text-align: center;" class="box">A verification mail has been sent to your to the email id provided. If you didn't recieve any mail click the button below:</p>
+                                <p style="text-align: center;" class="box" id="ev-confirmation">A verification mail has been sent to your to the email id provided. If you didn't recieve any mail click the button below:</p>
 								<ul class="actions fit small">
-                                    <li><a href="#" class="button primary fit small">Try Again!</a></li>
+                                    <li><a href="#" class="button primary fit small" id="email-v-bttn">Try Again!</a></li>
                                 </ul>
                             </article>
 					</div>
@@ -79,7 +76,7 @@
 									<h3>Social</h3>
 									<ul class="icons alt">
 										<li><a href="https://twitter.com/nivedita_sister" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a hhref="https://www.facebook.com/pg/SisterNiveditaUniversity/posts/" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="https://www.facebook.com/pg/SisterNiveditaUniversity/posts/" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
 										<li><a href="https://www.instagram.com/sisterniveditunivesity/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
 									</ul>
 								</section>
@@ -88,8 +85,8 @@
 						<section class="">
 							<section class="alt">
 								<h3>Address</h3>
-								<p>1234 Somewhere Road #87257<br />
-								Nashville, TN 00000-0000</p>
+								<p>DG 1/2 New Town, Action Area 1 (Beside Rabindra Tirtha) <br />
+									Kolkata 700156</p>
 							</section>
 							<section>
 								<h3>Phone</h3>
@@ -130,7 +127,6 @@
 				<script src="/__/firebase/init.js"></script>
 
 			<!-- Core  modules -->
-				<script src="assets/js/core/init.js"></script>
-				<script src="assets/js/core/auth.js"></script>
+				<script src="assets/js/core/auth.js" onload="verifyMail();"></script>
 	</body>
 </html>

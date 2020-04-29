@@ -2,8 +2,8 @@ firebase.auth().onAuthStateChanged(function(user)
 {
 	if(user)
 	{
-		if(window.location.pathname == '/registration.html')
-		window.location.href = '/rules.html';
+		if(window.location.pathname == '/registration')
+		window.location.href = '/rules';
 		let acnav = document.getElementById('acnav');
 		if(acnav)
 		acnav.innerHTML = `<li>` + user.displayName + `</li>
@@ -11,7 +11,7 @@ firebase.auth().onAuthStateChanged(function(user)
 		let primaryAct = document.getElementById('primary-action');
 		if(primaryAct)
 		{
-			primaryAct.href = '/rules.html';
+			primaryAct.href = '/rules';
 			primaryAct.innerText = 'Rules & Regulations';
 		}
 		let participant = document.getElementById('participant');
@@ -19,15 +19,16 @@ firebase.auth().onAuthStateChanged(function(user)
 		participant.innerText = user.displayName + ', please select the block you want to sumbit answer for.';
 		if(!user.emailVerified)
 		{
-			window.location.href = '/verify.html';
+			window.location.href = '/verify';
 		}
+		else if(window.location.pathname == '/verify') window.location.href = '/rules';
 	}
 	else
 	{
 		let primaryAct = document.getElementById('primary-action');
 		if(primaryAct)
 		{
-			primaryAct.href = '/registration.html';
+			primaryAct.href = '/registration';
 			primaryAct.innerText = 'Register Now!';
 		}
 	}
@@ -49,5 +50,5 @@ var user = firebase.auth().currentUser;
 if(!user)
 {
 	let _path = window.location.pathname;
-	if(_path=='/problem-statements.html') window.location.href = '/registration.html';
+	if(_path=='/problem-statements') window.location.href = '/registration';
 }
