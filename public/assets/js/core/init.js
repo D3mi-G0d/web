@@ -21,7 +21,7 @@ firebase.auth().onAuthStateChanged(function(user)
 		{
 			window.location.href = '/verify';
 		}
-		else if(window.location.pathname == '/verify') window.location.href = '/rules';
+		else if(user.emailVerified && window.location.pathname == '/verify') window.location.href = '/rules';
 	}
 	else
 	{
@@ -45,10 +45,9 @@ function signOut()
 	  
 }
 
-var user = firebase.auth().currentUser;
-
-if(!user)
+if(window.location.pathname == '/problem-statements')
 {
-	let _path = window.location.pathname;
-	if(_path=='/problem-statements') window.location.href = '/registration';
+	setInterval(() => {
+		if(!firebase.auth().currentUser) window.location.href = '/rules';
+	}, 5000);
 }

@@ -1,6 +1,11 @@
+
+
+
 function loginUI()
 {
-	if(firebase.auth().currentUser) window.close();
+	setInterval(() => {
+		if(firebase.auth().currentUser) window.close();
+	}, 750);
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
 	ui.start('#login-container', {
 		signInSuccessUrl: '/rules',
@@ -50,8 +55,8 @@ if(loginbttn)
 function verifyMail()
 {
 	let user = firebase.auth().currentUser;
-	if(!user) window.location.href = '/registration';
-	else
+	console.log(user)
+	if(user)
 	{
 		if(user.emailVerified)
 		{
@@ -60,13 +65,15 @@ function verifyMail()
 		else
 		{
 			let verifybttn = document.getElementById("email-v-bttn");
-			document.getElementById("ev-confirmation").innerText = "Sending Email...";
+			// document.getElementById("ev-confirmation").innerText = "Sending Email...";
 			verifybttn.addEventListener("click",
 				function()
 				{
+					document.getElementById("email-v-bttn").innerText = "Sending Email...";
 					document.getElementById("email-v-bttn").removeEventListener("click");
 					user.sendEmailVerification().then(function() {
-						document.getElementById("ev-confirmation").innerText = "Email Sent. Please Verify";
+						document.getElementById("ev-confirmation").innerText = "Email Sent Again. Please check your inbox & Verify";
+						document.getElementById("email-v-bttn").innerText = "Mail Sent!";
 					}).catch(function(error) {
 						document.getElementById("ev-confirmation").innerText = "Oops! Can't send mail :(";
 					});
@@ -76,8 +83,17 @@ function verifyMail()
 	}
 }
 
+firebase.auth().onAuthStateChanged(function(user)
+{
+	if(window.location.pathname == '/verify') verifyMail();
+});
 
 if(window.location.pathname == '/accounts') loginUI();
 
-
+if(window.location.pathname == '/verify')
+{
+	setInterval(() => {
+		if(!firebase.auth().currentUser) window.location.href = '/rules';
+	}, 5000);
+}
 
