@@ -45,10 +45,9 @@ function signOut()
 	  
 }
 
-var user = firebase.auth().currentUser;
-
-if(!user)
+if(window.location.pathname == '/problem-statements')
 {
-	let _path = window.location.pathname;
-	if(_path=='/problem-statements') window.location.href = '/registration';
+	setInterval(() => {
+		if(!firebase.auth().currentUser) window.location.href = '/rules';
+	}, 5000);
 }
