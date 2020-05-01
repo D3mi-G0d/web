@@ -7,7 +7,7 @@ firebase.auth().onAuthStateChanged(function(user)
 		let acnav = document.getElementById('acnav');
 		if(acnav)
 		acnav.innerHTML = `<li>` + user.displayName + `</li>
-		<li><a href="#" class="icon solid solo fa-sign-out-alt" onClick="signOut();"><span class="label">Sign Out</span></a></li>`
+		<li><a href="#header" class="icon solid solo fa-sign-out-alt" onClick="signOut();"><span class="label">Sign Out</span></a></li>`
 		let primaryAct = document.getElementById('primary-action');
 		if(primaryAct)
 		{
@@ -38,7 +38,7 @@ function signOut()
 {
 	firebase.auth().signOut().then(function() {
 		let acnav = document.getElementById('acnav');
-		acnav.innerHTML = `<li><a href="#" class="icon solid solo fa-sign-in-alt" onClick="window.open('/accounts.html', 'Sign In', 'width=600,height=600');"><span class="label">Sign In</span></a></li>`;
+		acnav.innerHTML = `<li><a href="#header" class="icon solid solo fa-sign-in-alt" onClick="window.open('/accounts.html', 'Sign In', 'width=600,height=600');"><span class="label">Sign In</span></a></li>`;
 	}).catch(function(error) {
 	// An error happened.
 	});
