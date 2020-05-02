@@ -1,8 +1,7 @@
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
+canvas.width =	Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+canvas.height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 let particlesArray;
 let mouse = {
 	x: null,
@@ -18,6 +17,13 @@ window.addEventListener("mousemove",
 	}
 );
 
+window.addEventListener("touchmove",
+	function (event)
+	{
+		mouse.x = event.x;
+		mouse.y = event.y;
+	}
+);
 class Particle {
 	constructor(x, y, directionX, directionY, size, color)
 	{
@@ -80,6 +86,7 @@ function initParticles() {
 
 function connect()
 {
+	let opacity = 1;
 	for(let a=0; a < particlesArray.length; a++)
 	{
 		for(let b = 0; b < particlesArray.length; b++)
@@ -88,7 +95,8 @@ function connect()
 							+ Math.pow(particlesArray[a].y - particlesArray[b].y, 2);
 			if(distance < (canvas.width/7) * (canvas.height/7))
 			{
-				ctx.strokeStyle = 'rgba(140,85,31,1)';
+				opacity = 1 - (distance/20000);
+				ctx.strokeStyle = 'rgba(140,85,31,'+opacity+')';
 				ctx.lineWidth = 1;
 				ctx.beginPath();
 				ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -122,12 +130,18 @@ window.addEventListener("resize",
 );
 
 window.addEventListener("mouseout",
-function()
+	function()
 	{
 		mouse.x = undefined;
 		mouse,y = undefined;
 	}
 );
-
+window.addEventListener("touchend",
+	function()
+	{
+		mouse.x = undefined;
+		mouse,y = undefined;
+	}
+);
 initParticles();
 pAnimate();

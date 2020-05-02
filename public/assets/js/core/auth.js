@@ -1,6 +1,5 @@
-
-
-
+//   // Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 function loginUI()
 {
 	setInterval(() => {
