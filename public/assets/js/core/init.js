@@ -38,7 +38,12 @@ function signOut()
 {
 	firebase.auth().signOut().then(function() {
 		let acnav = document.getElementById('acnav');
-		acnav.innerHTML = `<li><a href="#header" class="icon solid solo fa-sign-in-alt" onClick="window.open('/accounts.html', 'Sign In', 'width=600,height=600');"><span class="label">Sign In</span></a></li>`;
+		acnav.innerHTML = `
+		<ul class="icons" id="acnav"onClick="window.open('/accounts.html', 'Sign In', 'width=600,height=600');">
+			<li><b>Sign In</b></li>
+			<li><a href="#header" class="icon solid solo fa-sign-in-alt"><span class="label">Sign In</span></a></li>
+		</ul>
+		`;
 	}).catch(function(error) {
 	// An error happened.
 	});
