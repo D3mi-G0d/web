@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+User-agent: GoogleBot-Mobile
+Allow: /
+
+User-agent: GoogleBot
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: yahoo-mmcrawler
+Allow: /
+
+User-agent: GoogleBot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: yahoo-blogs/v3.9
+Allow: /
+
+Sitemap: https://www.shebang.co.in/sitemap.xml

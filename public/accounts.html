@@ -1,21 +1,40 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en-US">
 	<head>
 		<title>#!SHEBANG Login</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="Description" content="Keen about computational algorithms? Have a knack for coding/programming?	Come and participate in Shebang 2020. And, prove your prowess in the contest as well as showcase your proficiencies in coding and logical thinking.">
+
 		<meta name="keywords" content="Sister Nivedita University, SNU, code, coding, coding competition, contest, competition, questions">
 		<!-- Favicon and Touch Icons -->
 		<link href="https://snuniv.ac.in/assets/images/favicon.png" rel="shortcut icon" type="image/png">
 	</head>
 	<body>
 		<div id="login-container"></div>
+		<script>
+		const firebaseConfig = {
+			apiKey: "AIzaSyCguAZ2izaYNQfufJRP-h6wUdI0KRi1GHA",
+			authDomain: "shebang.co.in",
+			databaseURL: "https://csbs-snu.firebaseio.com",
+			projectId: "csbs-snu",
+			storageBucket: "csbs-snu.appspot.com",
+			messagingSenderId: "148722603945",
+			appId: "1:148722603945:web:a4abed64cf0471449f56b8",
+			measurementId: "G-8YC1R0P75C"
+		};
+		</script>
 		<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-		<script src="/__/firebase/7.14.2/firebase-app.js"></script>
+		<!-- <script src="/__/firebase/7.14.2/firebase-app.js"></script> -->
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+		<!-- TODO: Add SDKs for Firebase products that you want to use
+			https://firebase.google.com/docs/web/setup#available-libraries -->
+
 		<!-- Add Firebase products that you want to use -->
-		<script src="/__/firebase/7.14.2/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
 		<!-- Initialize Firebase -->
-		<script src="/__/firebase/init.js"></script>
+		<!-- <script src="/__/firebase/init.js"></script> -->
 		<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 		<script src="assets/js/core/auth.js"></script>	
