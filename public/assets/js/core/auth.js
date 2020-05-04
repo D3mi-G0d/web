@@ -1,4 +1,14 @@
 //   // Initialize Firebase
+const firebaseConfig = {
+	apiKey: "AIzaSyCguAZ2izaYNQfufJRP-h6wUdI0KRi1GHA",
+	authDomain: "shebang.co.in",
+	databaseURL: "https://csbs-snu.firebaseio.com",
+	projectId: "csbs-snu",
+	storageBucket: "csbs-snu.appspot.com",
+	messagingSenderId: "148722603945",
+	appId: "1:148722603945:web:a4abed64cf0471449f56b8",
+	measurementId: "G-8YC1R0P75C"
+};
 firebase.initializeApp(firebaseConfig);
 function loginUI()
 {
@@ -43,13 +53,6 @@ function loginUI()
 	});
 }
 
-let loginbttn = document.getElementById("loginbttn");
-if(loginbttn)
-{
-	loginbttn.addEventListener("click", function(){
-		window.open('/accounts.html', 'Sign In', 'width=600,height=600');
-	});
-}
 
 function verifyMail()
 {

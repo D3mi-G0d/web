@@ -1,4 +1,12 @@
-firebase.analytics();
+try
+{
+	firebase.analytics();
+}
+catch
+{
+	console.log("Analytics are disabled....");
+}
+
 firebase.auth().onAuthStateChanged(function(user)
 {
 	if(user)
