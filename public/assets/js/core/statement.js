@@ -1,5 +1,3 @@
-// problem statement related js
-
 let getStatement = async function(level) {
 	let token = localStorage.getItem("qid-token");
 	let statement;
@@ -36,6 +34,9 @@ firebase.auth().onAuthStateChanged(function(user)
 			// e has the error code
 		});
 	}
+	else
+	{
+		// user is unauthorised
+	}
 });
-
 
