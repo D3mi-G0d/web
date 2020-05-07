@@ -1,4 +1,5 @@
-let getStatement = async function(level) {
+const storage = firebase.storage();
+const getStatement = async function(level) {
 	let token = localStorage.getItem("qid-token");
 	let statement;
 	if(token != firebase.auth().currentUser.uid)
@@ -14,25 +15,30 @@ let getStatement = async function(level) {
 	{
 		serverResp = await fetch('http://localhost:5001/csbs-snu/us-central1/statement?level='+level);
 		statement = await serverResp.json();
+		
 		statement.submission = {
-			input: "storage_bucket_url/" + firebase.auth().currentUser.uid,
+			input: await storage.refFromURL('gs://csbs-snu.appspot.com/dataset/'+firebase.auth().currentUser.uid+'/'+level+'.txt').getDownloadURL()
 		};
-		localStorage.setItem(level,statement);
+		localStorage.setItem(level,JSON.stringify(statement));
+		return statement;
 	}
-	return statement;
+	return JSON.parse(statement);
 }
 
 firebase.auth().onAuthStateChanged(function(user)
 {
 	if(user)
 	{
-		getStatement('http://www.shebang.co.in/question.html?id').then((statement) => { //is this how its supposed to be? parameter part...
+		console.log("user found");
+		getStatement(new URLSearchParams(window.location.search).get('id')).then((statement) => {
 			
 			document.getElementById("lev").innerHTML = statement.level;
 			document.getElementById("state").innerHTML = statement.statement;
 			document.getElementById("input").innerHTML = statement.sample.input;
 			document.getElementById("output").innerHTML = statement.sample.output;
-
+			document.getElementById("sub_input").href = statement.submission.input;
+			document.getElementById("sub_input").download = statement.level + '.txt';
+			console.log("got statement");
 			var end = new Date("May 12, 2020 21:30:00").getTime();
         	var wait = setInterval(function() {
             	var now = new Date().getTime();
@@ -46,9 +52,8 @@ firebase.auth().onAuthStateChanged(function(user)
             	}
         	}, 60 * 1000);
 
-			console.log(statement);
-
 		}).catch( e => {
+			console.log(e);
 			// handle error here
 			// e has the error code
 		});
