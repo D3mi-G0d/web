@@ -5,6 +5,11 @@
   "hosting": {
     "public": "public",
     "cleanUrls": true,
+    // "redirects": [ {
+    // "source": "/problem-statements",
+    // "destination": "/coming",
+    // "type": 301
+    // }],
     "ignore": [
       "firebase.json",
       "**/.*",

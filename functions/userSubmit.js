@@ -1,0 +1,1 @@
+// when the user is failed to complete & have set question as attempted & o obtained.
