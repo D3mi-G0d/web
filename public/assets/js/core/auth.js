@@ -27,9 +27,11 @@ function loginUI()
 						{
 							document.getElementById("login-container").innerText = "Sending Email Verification Link...";
 							authResult.user.sendEmailVerification().then(function(){
-								window.close();
+								console.log("sent");
+								//window.close();
 							}).catch(function(error){
 								document.getElementById("login-container").innerText = "Oops! Can't Verify Email!";
+								console.log(e);
 							})
 						}
 					}

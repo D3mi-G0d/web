@@ -1,4 +1,5 @@
 const storage = firebase.storage();
+firebase.functions().useFunctionsEmulator('http://localhost:5001');
 const getStatement = async function(level) {
 	let token = localStorage.getItem("qid-token");
 	let statement;
@@ -13,9 +14,10 @@ const getStatement = async function(level) {
 	}
 	if(!statement)
 	{
-		serverResp = await fetch('http://localhost:5001/csbs-snu/us-central1/statement?level='+level);
-		statement = await serverResp.json();
-		
+		statementRef = firebase.functions().httpsCallable('statement');
+		serverResp = await statementRef({level: level});
+		statement = serverResp.data.data;
+		if(statement === "Unauthorised") throw new Error("Unauthorised");
 		statement.submission = {
 			input: await storage.refFromURL('gs://csbs-snu.appspot.com/dataset/'+firebase.auth().currentUser.uid+'/'+level+'.txt').getDownloadURL()
 		};

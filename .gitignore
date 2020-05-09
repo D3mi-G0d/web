@@ -6,8 +6,16 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 
+#python related
+*.pyc
+bin/
+lib/
+
 # Firebase cache
 .firebase/
+
+# Firebase Service AC Key
+serviceAccountKey.json
 
 # Firebase config
 

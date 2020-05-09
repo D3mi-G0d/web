@@ -1,12 +1,13 @@
 const functions = require('firebase-functions');
-const cors = require('cors')({origin: true});
+// const cors = require('cors')({origin: true});
 
-exports.statement = functions.https.onRequest((request, response) => {
-	cors(request, response, () => {
+exports.statement = functions.https.onCall((data, context) => {
+	if(context.auth.uid == '1bsf0a1bhONzXijY2KP8Di2FjP52' || !context.auth.uid == 'LcvQuxLYYIdKCZgLDEjMQ9K6dOz1')	// testing access
+	{
 		var statement = ``;
 		var score = 0;
 		var sample = {};
-		if(request.query.level === 'tetris')
+		if(data.level === 'tetris')
 		{
 			statement = `
 			This is a statement for level tetris
@@ -16,7 +17,7 @@ exports.statement = functions.https.onRequest((request, response) => {
 			sample.input = "this is a sample imput";
 			sample.output = "this is a sample output";
 		}
-		else if(request.query.level === 'minecraft')
+		else if(data.level === 'minecraft')
 		{
 			statement = `
 			This is a statement for level minecraft
@@ -26,7 +27,7 @@ exports.statement = functions.https.onRequest((request, response) => {
 			sample.input = "this is a sample imput";
 			sample.output = "this is a sample output";
 		}
-		else if(request.query.level === 'hl')
+		else if(data.level === 'hl')
 		{
 			statement = `
 			This is a statement for level Half Life
@@ -36,7 +37,7 @@ exports.statement = functions.https.onRequest((request, response) => {
 			sample.input = "this is a sample imput";
 			sample.output = "this is a sample output";
 		}
-		else if(request.query.level === 'nfs')
+		else if(data.level === 'nfs')
 		{
 			statement = `
 			This is a statement for level Need For Speed
@@ -46,7 +47,7 @@ exports.statement = functions.https.onRequest((request, response) => {
 			sample.input = "this is a sample imput";
 			sample.output = "this is a sample output";
 		}
-		else if(request.query.level === 'dmc')
+		else if(data.level === 'dmc')
 		{
 			statement = `
 			This is a statement for level Devil May Cry
@@ -57,13 +58,19 @@ exports.statement = functions.https.onRequest((request, response) => {
 			sample.input = "this is a sample imput";
 			sample.output = "this is a sample output";
 		}
+		else
+		{
+			return {data: "Unauthorised"};
+		}
 		var result = {
-			level: request.query.level,
+			level: data.level,
 			statement: statement,
 			scorepm: score,
 			sample: sample
 		};
-
-		response.send(result);
-	});
+		return {data: result};
+	}
+	else return {data: "Unauthorised"};
 });
+
+

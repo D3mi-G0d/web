@@ -26,11 +26,12 @@ firebase.auth().onAuthStateChanged(function(user)
 		let participant = document.getElementById('participant');
 		if(participant)
 		participant.innerText = user.displayName + ', please select the block you want to sumbit answer for.';
-		if(!user.emailVerified)
-		{
-			window.location.href = '/verify';
-		}
-		else if(user.emailVerified && window.location.pathname == '/verify') window.location.href = '/rules';
+		// if(!user.emailVerified)
+		// {
+		// 	window.location.href = '/verify';
+		// }
+		// else if(user.emailVerified && window.location.pathname == '/verify') window.location.href = '/rules';
+		if(user.emailVerified && window.location.pathname == '/verify') window.location.href = '/rules';
 	}
 	else
 	{
