@@ -69,7 +69,20 @@
 									<a class="image main"><img style="width: 30%; margin: auto;" src="images/question0.png" alt="coding, engineering"/></a>
 									<h2>#!Problem Statements</h2>
 									<p>The problems are sorted in increasing order of difficulties, although you're free to solve them in any order you prefer, we suggest that you follow the levels. Good Luck!</p>
+									
 								</header>
+								
+								<div class="popup" style="float: right;" onclick="myFunction()"><b>Score: </b>690 <a class="icon solid solo fa-question-circle"></a>
+									<span class="popuptext" id="myPopup">
+										<p style="text-align: center;"><b>Points Remaining:</b></p>
+										<p id="t" style="text-align: center;"></p>
+										<p id="m" style="text-align: center;"></p>
+										<p id="hl" style="text-align: center;"></p>
+										<p id="nfs" style="text-align: center;"></p>
+										<p id="dmc" style="text-align: center;"></p>
+									</span>
+								</div>
+								<br>
 
 								<div class="box">
 									<p>[ L01 ] <b>TETRIS</b><br>Simple and Well-defined. Just put the blocks together!</p>
@@ -77,7 +90,7 @@
 										<li id="tetris"><a href="/question.html?id=tetris" target="_blank" class="button large fit icon solid fa-th" value="tetris">Go to Problem Statement</a></li>
 									</ul>
 								</div>
-								
+
 								<div class="box">
 									<p>[ L02 ] <b>MINECRAFT</b><br>Explore and Create. Multiple approches possible.</p>
 									<ul class="actions fit">
@@ -105,7 +118,29 @@
 										<li id="dmc"><a href="/question.html?id=dmc" target="_blank" class="button large icon solid fa-skull-crossbones">Go to Problem Statement</a></li>
 									</ul>
 								</div>
+								<br>
+								
+								<ul style="float: right;" class="actions box">
+									<li id="dmc"><a id="myBtn" class="button primary large icon solid fa-flag-checkered">Finish Submissions</a></li>
+								</ul>
 
+								<div id="myModal" class="modal">
+
+									<!-- Modal content -->
+										<div class="modal-content">
+										  <div class="modal-header">
+												<span class="close">&times;</span>
+												<h2>Are you sure? </h2>
+										  </div>
+										  <div class="modal-body">
+												<p>Make sure you've attended all the question</p>
+												<input type="submit">
+												<hr>
+										  </div>
+										</div>
+
+								  </div>
+								  <br><br>
 							</article>
 
 						
@@ -152,7 +187,62 @@
 			
 
 		<!-- Scripts -->
-
+<script>
+	var end = new Date("May 12, 2020 21:30:00").getTime();
+        	var wait = setInterval(function() {
+            	var now = new Date().getTime();
+            	var mrem = (end - now) / 60000;
+				var mrem = Math.abs(Math.round(mrem));
+				var t = mrem * 1;
+				var h = mrem * 2;
+				var d = mrem * 3;
+				document.getElementById("t").innerHTML = "Tetris " + t + " points";
+				document.getElementById("m").innerHTML = "Minecraft " + t + " points";
+				document.getElementById("hl").innerHTML = "Half Life " + h + " points";
+				document.getElementById("nfs").innerHTML = "Need For Speed " + h + " points"
+				document.getElementById("dmc").innerHTML = "Devil May Cry " + d + " points";
+            	if (mrem < 0) {
+                	clearInterval(wait);
+                	document.getElementById("srem").innerHTML = "EXPIRED";
+            	}
+        	}, 60 * 1000);
+</script>	
+		
+<script>
+	// When the user clicks on div, open the popup
+	function myFunction() {
+	  var popup = document.getElementById("myPopup");
+	  popup.classList.toggle("show");
+	}
+</script>
+<script>
+	// Get the modal
+	var modal = document.getElementById("myModal");
+	
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+	
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+	
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+	
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+	
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+		modal.style.display = "none";
+	  }
+	}
+</script>
+			
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
