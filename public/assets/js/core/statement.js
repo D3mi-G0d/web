@@ -1,11 +1,12 @@
 const storage = firebase.storage();
-firebase.functions().useFunctionsEmulator('http://localhost:5001');
+// firebase.functions().useFunctionsEmulator('http://localhost:5001');	// remove before deploy
 const getStatement = async function(level) {
 	let token = localStorage.getItem("qid-token");
 	let statement;
 	if(token != firebase.auth().currentUser.uid)
 	{
 		localStorage.removeItem(level);
+		localStorage.removeItem("myscore");
 		localStorage.setItem("qid-token",firebase.auth().currentUser.uid);
 	}
 	if(token)
@@ -41,18 +42,20 @@ firebase.auth().onAuthStateChanged(function(user)
 			document.getElementById("sub_input").href = statement.submission.input;
 			document.getElementById("sub_input").download = statement.level + '.txt';
 			console.log("got statement");
-			var end = new Date("May 12, 2020 21:30:00").getTime();
-        	var wait = setInterval(function() {
-            	var now = new Date().getTime();
-            	var mrem = (end - now) / 60000;
+			updateScore(statement);
+			window.wait = setInterval(function() {
+				
+				var end = new Date("May 12, 2020 21:30:00").getTime();
+				var now = new Date().getTime();
+				var mrem = (end - now) / 60000;
 				var mrem = Math.abs(Math.round(mrem));
 				var scorerem = mrem * statement.scorepm;
-            	document.getElementById("mrem").innerHTML = scorerem + " points remaning";
-            	if (mrem < 0) {
-                	clearInterval(wait);
-                	document.getElementById("mrem").innerHTML = "EXPIRED";
-            	}
-        	}, 60 * 1000);
+				document.getElementById("cur-scr").innerHTML = scorerem + " points remaning";
+				if (mrem < 0) {
+					clearInterval(window.wait);
+					document.getElementById("cur-scr").innerHTML = "EXPIRED";
+				}
+			}, 60 * 1000);
 
 		}).catch( e => {
 			console.log(e);
@@ -66,3 +69,13 @@ firebase.auth().onAuthStateChanged(function(user)
 	}
 });
 
+function updateScore(statement)
+{
+	var end = new Date("May 12, 2020 21:30:00").getTime();
+	var now = new Date().getTime();
+	var mrem = (end - now) / 60000;
+	var mrem = Math.abs(Math.round(mrem));
+	var scorerem = mrem * statement.scorepm;
+	document.getElementById("cur-scr").innerHTML = scorerem + " points remaning";
+	return mrem;
+}

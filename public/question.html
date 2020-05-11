@@ -71,20 +71,20 @@
 								</header>
 								
 								<!-- current score -->
-								<div class="icon tooltip" id="cur-scr" style="text-align: right;">Score: 690 
-									<span class="tooltiptext" >Tooltip text</span>
+								<div class="icon tooltip" id="cur-scr" style="text-align: right;">Score: XX 
+									<span class="tooltiptext" >Maximum obtainable score</span>
 								</div>
 
 								<br>
                                 
-                                <div class="box">
-                                    <p id="state">wq qw eqw e qwe ewfsdf dg dfg fs fhfgd hfdh fgh fghf ghg fddn hssd hf dg hfgsgd g s dgfd  dag dasf ss af gsf gf gfh dfh gfsh gf h fgh fg hgf h dsfasfer ag rg earg t rh sh  h erg hg tht gh  he fh etrhg se h dgh e g eg g  ge ge g e bhr hsz rh bh edr b ht egb r bher fbhs er h erbh er bhfe hbe  rbh er hb ehefrbh  erbhf frehb er hbe bh efrh e bhe bh fher hbe h ehb erh e he rbh ehb hb er he he h hb h be hb erh erh er h erh sz z frhb esr bh efr zsh  f her s  bhes hb esf rbh edf hbe hfre fr hrse hr bf  bhehb fbh fr </p>
+								<div class="box">
+                                    <p id="state">Your problem statement is still under the ocean. Please hold on a little bit. </p>
                                     <pre class="align-left"><b>Sample Input</b>
-                                        <code class="align-left" id="input">1<br>23<br>23<br>23</code>
+                                        <code class="align-left" id="input">X<br>XX<br>XXXXXX<br>XXXXXXXX</code>
                                     </pre>
                                     
                                     <pre class="align-left"><b>Sample Output</b>
-                                        <code class="align-left" id="output">1<br>23<br>23<br>23</code>
+                                        <code class="align-left" id="output">X<br>XX<br>XXXXXX<br>XXXXXXXX</code>
                                     </pre>
                                 </div>
 
@@ -105,14 +105,14 @@
     										<div class="modal-body">
 												<br>
 												  <div class="demo-droppable"><!--drag n drop-->
-													  Drag and Drop <br> Your <b> .zip </b> File Here!
+													  Drag and Drop <br> Your <b> .txt </b> File Here!
 												  </div>
 												<br>
 												<div class="output"></div>
-												<label>Or Select Your <b> .zip </b>File for Upload: </label>  
-												<input type="file"/> <!--upload file [select file]-->
-												<br>
-												<input type="submit"/>
+												<!-- <label>Or Select Your <b> .txt </b>File for Upload: </label>  
+												<input type="file" accept=".txt" id="fileinput"/> <!--upload file [select file]-->
+												<br> -->
+												<input type="submit" id="submbtn"/>
 												<hr>
     										</div>
   										</div>
@@ -223,7 +223,9 @@
 	  function makeDroppable(ele, callback) {
 		var input = document.createElement('input');
 		input.setAttribute('type', 'file');
-		input.setAttribute('multiple', true);
+		input.setAttribute('multiple', false);
+		input.setAttribute('id',"fileinput");
+		input.setAttribute('accept','.txt');
 		input.style.display = 'none';
 		input.addEventListener('change', function(e) {
 		  triggerCallback(e, callback);
@@ -262,9 +264,6 @@
 		var output = document.querySelector('.output');
 		output.innerHTML = '';
 		for(var i=0; i<files.length; i++) {
-		  if(files[i].type.indexOf('image/') === 0) {
-			output.innerHTML += '<img width="200" src="' + URL.createObjectURL(files[i]) + '" />';
-		  }
 		  output.innerHTML += '<p>'+files[i].name+'</p>';
 		}
 	  });
@@ -290,6 +289,7 @@
 			<!-- Add Firebase products that you want to use -->
 			<script src="/__/firebase/7.14.2/firebase-auth.js"></script>
 			<script src="/__/firebase/7.14.2/firebase-storage.js"></script>
+			<script src="/__/firebase/7.14.2/firebase-firestore.js"></script>
 			<!-- Initialize Firebase -->
 			<script src="/__/firebase/init.js"></script>
 			<!-- Core  modules -->

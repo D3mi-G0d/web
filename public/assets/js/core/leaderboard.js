@@ -1,6 +1,15 @@
 
 const messaging = firebase.messaging();
 const db = firebase.database();
+window.nreflflag = 1;
+window.addEventListener('DOMContentLoaded', e => {
+	db.ref('/leaderboard').once('value').then(snapshot => {
+		updateBoard(snapshot.val());
+	}).catch(e => {
+		console.log(e);
+	});
+});
+
 
 messaging.getToken().then(token => {
 	console.log(token);
@@ -19,11 +28,6 @@ messaging.getToken().then(token => {
 	// Notification aceess denied!
 	// show any custom warning
 	// if you want button click refresh, implement here
-	document.getElementById("refresh_board").onclick = (e) => {
-		db.ref('/leaderboard').once('value').then(snapshot => {
-			updateBoard(snapshot.val());
-		})
-	};
 	});
 
 messaging.onTokenRefresh(() => {
@@ -57,5 +61,34 @@ function updateBoard(leaderboard)
 	let names = leaderboard.name;
 	let scores = leaderboard.score;
 	console.log("Highest : ",names[0],scores[0]);
-	// update UI with new info. 
+	for(let i = 0;i < names.length;i++)
+	{
+		document.getElementById("name"+i.toString()).innerText = names[i];
+		document.getElementById("point"+i.toString()).innerText = scores[i];
+	}
 }
+
+
+document.getElementById("refresh_board").onclick = (e) => {
+	// start loading animation
+	if(window.nreflflag)
+	{
+		db.ref('/leaderboard').once('value').then(snapshot => {
+			window.nreflflag = 0;
+			// stop loading animation
+			setTimeout(() => {
+				window.nreflflag = 1;
+			},2000*60);
+			updateBoard(snapshot.val());
+		}).catch(e => {
+			console.log(e);
+		});
+	}
+	else
+	{
+		setTimeout(() => {
+			// loading animation
+		},3000);
+	}
+};
+

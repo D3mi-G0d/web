@@ -72,7 +72,7 @@
 									
 								</header>
 								
-								<div class="popup" style="float: right;" onclick="myFunction()"><b>Score: </b>690 <a class="icon solid solo fa-question-circle"></a>
+								<div class="popup" style="float: right;" onclick="myFunction()"><b>Score: </b><span id="tot-scr">690</span> <a class="icon solid solo fa-question-circle"></a>
 									<span class="popuptext" id="myPopup">
 										<p style="text-align: center;"><b>Points Remaining:</b></p>
 										<p id="t" style="text-align: center;"></p>
@@ -130,11 +130,11 @@
 										<div class="modal-content">
 										  <div class="modal-header">
 												<span class="close">&times;</span>
-												<h2>Are you sure? </h2>
+												<h2 id="modal-head">Are you sure? </h2>
 										  </div>
 										  <div class="modal-body">
-												<p>Make sure you've attended all the question</p>
-												<input type="submit">
+												<p id="modal-txt">Make sure you've attended all the question</p>
+												<input type="submit" value="submit" id="final-sub">
 												<hr>
 										  </div>
 										</div>
@@ -188,24 +188,56 @@
 
 		<!-- Scripts -->
 <script>
-	var end = new Date("May 12, 2020 21:30:00").getTime();
-        	var wait = setInterval(function() {
-            	var now = new Date().getTime();
-            	var mrem = (end - now) / 60000;
-				var mrem = Math.abs(Math.round(mrem));
-				var t = mrem * 1;
-				var h = mrem * 2;
-				var d = mrem * 3;
-				document.getElementById("t").innerHTML = "Tetris " + t + " points";
-				document.getElementById("m").innerHTML = "Minecraft " + t + " points";
-				document.getElementById("hl").innerHTML = "Half Life " + h + " points";
-				document.getElementById("nfs").innerHTML = "Need For Speed " + h + " points"
-				document.getElementById("dmc").innerHTML = "Devil May Cry " + d + " points";
-            	if (mrem < 0) {
-                	clearInterval(wait);
-                	document.getElementById("srem").innerHTML = "EXPIRED";
-            	}
-        	}, 60 * 1000);
+	window.addEventListener("DOMContentLoaded", event => {
+		updateScore();
+	});
+	var wait = setInterval(function() {
+		var mrem = updateScore();
+		if (mrem < 0) {
+			clearInterval(wait);
+			document.getElementById("srem").innerHTML = "EXPIRED";
+		}
+	}, 60 * 1000);
+	function updateScore()
+	{
+		var end = new Date("May 12, 2020 21:30:00").getTime();
+		var now = new Date().getTime();
+		var mrem = (end - now) / 60000;
+		var mrem = Math.abs(Math.round(mrem));
+		var mc = te = mrem * 1;
+		var hl = nfs = mrem * 2;
+		var d = mrem * 3;
+		var currStat = localStorage.getItem("myscore");
+		currStat = JSON.parse(currStat);
+		if(!currStat) { 
+			let empObj = {
+				"output": {
+					"tetris": 'XXXX',
+					"minecraft": 'XXXX',
+					"hl": 'XXXX',
+					"nfs": 'XXXX',
+					"dmc": 'XXXX'
+				},
+				score: 0
+			};
+			localStorage.setItem("myscore",JSON.stringify(empObj));
+		}
+		te = currStat.output.tetris <= 150 ? currStat.output.tetris : te;
+		mc = currStat.output.minecraft <= 150 ? currStat.output.minecraft : mc;
+		hl = currStat.output.hl <= 300 ? currStat.output.hl : hl;
+		nfs = currStat.output.nfs <= 300 ? currStat.output.nfs : nfs;
+		d = currStat.output.dmc <= 450 ? currStat.output.dmc : d;
+		document.getElementById("tot-scr").innerText = currStat.score;
+		document.getElementById("t").innerHTML = "Tetris " + te + " points";
+		document.getElementById("m").innerHTML = "Minecraft " + mc + " points";
+		document.getElementById("hl").innerHTML = "Half Life " + hl + " points";
+		document.getElementById("nfs").innerHTML = "Need For Speed " + nfs + " points"
+		document.getElementById("dmc").innerHTML = "Devil May Cry " + d + " points";
+		return mrem;
+	}
+	window.addEventListener('storage', () => {
+		updateScore();   
+	});
 </script>	
 		
 <script>
@@ -262,6 +294,7 @@
 			<!-- Add Firebase products that you want to use -->
 			<script src="/__/firebase/7.14.2/firebase-auth.js"></script>
 			<script src="/__/firebase/7.14.2/firebase-storage.js"></script>
+			<script src="/__/firebase/7.14.2/firebase-functions.js"></script>
 			<!-- Initialize Firebase -->
 			<script src="/__/firebase/init.js"></script>
 			<!-- Core  modules -->

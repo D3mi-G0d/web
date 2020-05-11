@@ -7,7 +7,7 @@ const admin = require('firebase-admin');
 // const serverTime = Date.now();
 const startTime = 1589291100;	// 12th May 7:15PM 2020 IST
 // const endTime = 1589300100;		// 12th May 9:45PM 2020 IST
-const endTime = new Date("2020-05-09 18:30+05:30").getTime();			// 9th May 6:30PM FOR TESTING! PLEASE DELETE
+const endTime = new Date("2020-05-10 10:30+05:30").getTime();			// 10th May 10:30AM FOR TESTING! PLEASE DELETE
 
 const pointTable = {
 	tetris: 1,
@@ -33,11 +33,11 @@ exports.submit = functions.storage.object().onFinalize(async (object) => {
 		let userData = userDoc.data();
 		let pointGain = 0;
 		let usersUpdate = {};
-		if(userData.output[level] == "true")	// already submitted. Ignore.
+		if(userData.output[level] <= 450)	// already submitted. Ignore.
 		{
 			return null;
 		}
-		if(userData.output[level] != "false")
+		else
 		{
 			if(userData.output[level] == sMd5)
 			{
@@ -48,11 +48,11 @@ exports.submit = functions.storage.object().onFinalize(async (object) => {
 			}
 		}
 		if(pointGain === 0) {
-			usersUpdate[`output.${level}`] = "false";
+			usersUpdate[`output.${level}`] = 0;
 			return participants.doc(uid).update(usersUpdate);
 		}
 		else {
-			usersUpdate[`output.${level}`] = "true";
+			usersUpdate[`output.${level}`] = pointGain;
 			usersUpdate['score'] = userData.score + pointGain;
 			await participants.doc(uid).update(usersUpdate);
 			let leaderBoard = await participants.orderBy('score','desc').limit(5).get();

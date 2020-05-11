@@ -18,6 +18,10 @@ if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'subscribe') {
 	exports.subscribe = require('./subscribe').subscribe;
 }
 
+if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'postSubmit') {
+	exports.postSubmit = require('./postSubmit').postSubmit;
+}
+
 // if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'leaderboard') {
 // 	exports.leaderboard = require('./leaderboard').leaderboard;
 // }
