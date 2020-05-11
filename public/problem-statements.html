@@ -22,7 +22,9 @@
 		<link href="https://snuniv.ac.in/assets/images/favicon.png" rel="shortcut icon" type="image/png">
 
 	</head>
-	<body class="is-preload">
+	<body onload="myFunction()" class="is-preload">
+
+		<div id="loader"><img style="position: relative; left: 45%; top: 35%;" src="images/load.svg" ></div> <!--loading animation-->
 
 		<!-- Wrapper -->
 			<div id="wrapper" class="fade-in">
@@ -72,14 +74,14 @@
 									
 								</header>
 								
-								<div class="popup" style="float: right;" onclick="myFunction()"><b>Score: </b><span id="tot-scr">690</span> <a class="icon solid solo fa-question-circle"></a>
+								<div class="popup" style="float: right;" onclick="popup()"><b>Score: </b><span id="tot-scr">690</span> <a class="icon solid solo fa-question-circle"></a>
 									<span class="popuptext" id="myPopup">
 										<p style="text-align: center;"><b>Points Remaining:</b></p>
-										<p id="t" style="text-align: center;"></p>
-										<p id="m" style="text-align: center;"></p>
-										<p id="hl" style="text-align: center;"></p>
-										<p id="nfs" style="text-align: center;"></p>
-										<p id="dmc" style="text-align: center;"></p>
+										<p id="t" style="text-align: center;">Tetris: 150 points</p>
+										<p id="m" style="text-align: center;">Minecraft: 150 points</p>
+										<p id="hl" style="text-align: center;">Half Life: 300 points</p>
+										<p id="nfs" style="text-align: center;">Need for Speed: 300 points</p>
+										<p id="dmc" style="text-align: center;">Devil May Cry: 450 points</p>
 									</span>
 								</div>
 								<br>
@@ -133,13 +135,15 @@
 												<h2 id="modal-head">Are you sure? </h2>
 										  </div>
 										  <div class="modal-body">
-												<p id="modal-txt">Make sure you've attended all the question</p>
-												<input type="submit" value="submit" id="final-sub">
+											<p><b>Check the following points before you make submission:</b></p>
+											<p style="font-size: 14px;">&bull; You've attended as many questions as you can, and you've uploaded all the output file properly.<br>&bull; Once you've made the final submission, you cannot make any changes or add any new submission.</p>
+											<input type="submit" value="submit" id="final-sub">
 												<hr>
 										  </div>
 										</div>
 
 								  </div>
+								  <hr>
 								  <br><br>
 							</article>
 
@@ -187,6 +191,20 @@
 			
 
 		<!-- Scripts -->
+
+		<script> //loading animation
+			var myVar;
+			
+			function myFunction() {
+			  myVar = setTimeout(showPage, 3000);
+			}
+			
+			function showPage() {
+			  document.getElementById("loader").style.display = "none";
+			  document.getElementById("wrapper").style.display = "block";
+			}
+			</script>
+
 <script>
 	window.addEventListener("DOMContentLoaded", event => {
 		updateScore();
@@ -242,7 +260,7 @@
 		
 <script>
 	// When the user clicks on div, open the popup
-	function myFunction() {
+	function popup() {
 	  var popup = document.getElementById("myPopup");
 	  popup.classList.toggle("show");
 	}
