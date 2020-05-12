@@ -22,7 +22,7 @@ exports.postSubmit = functions.https.onCall( async (data, context) => {
 		let leaderList = await participants.orderBy('score','desc').limit(10).get();
 		for(let i = 0; i < leaderList.size; i++)
 		{
-			if(leaderList.docs[i].id == context.auth.id)
+			if(leaderList.docs[i].id == context.auth.uid)
 			{
 				console.log(leaderList.docs[i].id);
 				return {data: "top"}

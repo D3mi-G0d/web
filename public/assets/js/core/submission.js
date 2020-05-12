@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", event => {
 		document.getElementById("submbtn").onclick = function() {
+			showLoad();
 			// TODO: Add loading animation
 			// OR: show status in the button. Current Status : processing...
 			const fileinput = document.getElementById("fileinput").files[0];
@@ -40,6 +41,16 @@ function syncWithDB() {
 			let score = state;	// score of this problem
 			document.getElementById("cur-scr").innerText = score;
 			document.getElementsByClassName("close")[0].click();	// close the modal
+			let sbtn = document.getElementById("myBtn");
+			sbtn.innerText = "Attempted!";
+			sbtn.id = "";
+			sbtn.disabled = true;
+			sbtn.classList.add("disabled");
+			sbtn.classList.remove("fa-upload");
+			sbtn.classList.add("fa-check");
+			document.getElementById("sub_input").remove();
+			clearInterval(window.wait);
+			showPage();
 		}
     });
 }
@@ -64,6 +75,7 @@ firebase.auth().onAuthStateChanged((user) => {
 				sbtn.disabled = true;
 				sbtn.classList.add("disabled");
 				sbtn.classList.remove("fa-upload");
+				sbtn.classList.add("fa-check");
 				document.getElementById("sub_input").remove();
 				clearInterval(window.wait);
 			}

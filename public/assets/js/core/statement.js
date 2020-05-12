@@ -33,6 +33,7 @@ firebase.auth().onAuthStateChanged(function(user)
 	if(user)
 	{
 		console.log("user found");
+		showLoad();
 		getStatement(new URLSearchParams(window.location.search).get('id')).then((statement) => {
 			
 			document.getElementById("lev").innerHTML = statement.level;
@@ -43,6 +44,7 @@ firebase.auth().onAuthStateChanged(function(user)
 			document.getElementById("sub_input").download = statement.level + '.txt';
 			console.log("got statement");
 			updateScore(statement);
+			showPage();
 			window.wait = setInterval(function() {
 				
 				var end = new Date("May 12, 2020 21:30:00").getTime();
@@ -59,6 +61,7 @@ firebase.auth().onAuthStateChanged(function(user)
 
 		}).catch( e => {
 			console.log(e);
+			showPage();
 			// handle error here
 			// e has the error code
 		});

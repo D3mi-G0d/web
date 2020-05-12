@@ -10,7 +10,21 @@ messaging.setBackgroundMessageHandler(function(payload) {
 	const notificationOptions = {
 	  body: "Heighest Score : "+JSON.parse(payload.data.leads).score[0],
 	};
-  
-	return self.registration.showNotification(notificationTitle,
-	  notificationOptions);
+	const promiseChain = clients.matchAll({
+		type: 'window',
+		includeUncontrolled: true
+	  })
+	  .then((windowClients) => {
+		for (let i = 0; i < windowClients.length; i++) {
+		  const windowClient = windowClients[i];
+		  windowClient.postMessage(payload);
+		}
+	  })
+	  .then(() => {
+		return self.registration.showNotification(notificationTitle,
+			notificationOptions);
+	  });
+	  return promiseChain;
+	// return self.registration.showNotification(notificationTitle,
+	//   notificationOptions);
   });

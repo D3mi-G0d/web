@@ -70,25 +70,34 @@ function updateBoard(leaderboard)
 
 
 document.getElementById("refresh_board").onclick = (e) => {
+	showLoad();
 	// start loading animation
 	if(window.nreflflag)
 	{
 		db.ref('/leaderboard').once('value').then(snapshot => {
 			window.nreflflag = 0;
+			showPage();
 			// stop loading animation
 			setTimeout(() => {
 				window.nreflflag = 1;
 			},2000*60);
 			updateBoard(snapshot.val());
 		}).catch(e => {
+			showPage();
 			console.log(e);
 		});
 	}
 	else
 	{
 		setTimeout(() => {
+			showPage();
 			// loading animation
-		},3000);
+		},2000);
 	}
 };
+
+navigator.serviceWorker.addEventListener('message', function(event) {
+	console.log('Received a message from service worker: ', event.data);
+	updateBoard(JSON.parse(event.data.data.leads));
+  });
 

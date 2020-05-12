@@ -66,3 +66,16 @@ if(window.location.pathname == '/problem-statements')
 		if(!firebase.auth().currentUser) window.location.href = '/rules';
 	}, 5000);
 }
+
+
+
+function showLoad()
+{
+	document.getElementById("loader").style.display = "";
+	document.getElementById("wrapper").style.display = "";
+}
+
+function showPage() {
+	document.getElementById("loader").style.display = "none";
+	document.getElementById("wrapper").style.display = "block";
+}

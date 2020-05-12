@@ -12,14 +12,12 @@ firebase.auth().onAuthStateChanged(function(user){
 			document.getElementById("modal-txt").innerText = "Congrats! You are one of our top participants! Please upload your source codes as a zip file";
 			document.getElementById("modal-txt").insertAdjacentHTML('afterend',`
 			<br>
-				<div class="demo-droppable"><!--drag n drop-->
-					Drag and Drop <br> Your <b> .zip </b> File Here!
-				</div>
+			<label>Select Your <b> .zip </b>File for Upload: </label>  
+			<input type="file" accept=".zip, .7z, .rar, .tar.gz" id="fileinput"/> <!--upload file [select file]-->
 			<br>
 			<div class="output"></div>
-			<label>Or Select Your <b> .zip </b>File for Upload: </label>  
-			<input type="file" accept=".zip, .7z, .rar, .tar.gz" id="fileinput" onchange="ps();"/> <!--upload file [select file]-->
 			<br>
+			<input type="submit" value="submit" id="src-sub" onclick="ps();">
 			`);
 			// window.location.href = '/postsubmission'
 		}
@@ -33,15 +31,27 @@ firebase.auth().onAuthStateChanged(function(user){
 
 function ps()
 {
+	showLoad();
 	// start load animation
 	let blob = document.getElementById("fileinput").files[0];
 	let storageRef = firebase.storage().ref();
-	let fileRef = storageRef.child('sources/'+firebase.auth().currentUser.uid);
+	let fileRef = storageRef.child('sources/'+firebase.auth().currentUser.uid+'/source');
 	fileRef.put(blob).then(snapshot => {
+		document.getElementById("mod-close").click();
 		console.log("Upload Success!");
+		showPage();
 		// close loading animation and redirect
 	}).catch(e => { console.log(e); 
+		showPage();
 	});
 }
-
+firebase.auth().onAuthStateChanged(user => {
+	let db = firebase.firestore();
+	db.collection("participants").doc(firebase.auth().currentUser.uid)
+	.get().then(function(doc) {
+		console.log("Current data: ", doc.data());
+		localStorage.setItem("myscore",JSON.stringify(doc.data()));
+		updateScore();
+	});
+});
 
