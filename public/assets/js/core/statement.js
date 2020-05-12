@@ -1,5 +1,5 @@
 const storage = firebase.storage();
-// firebase.functions().useFunctionsEmulator('http://localhost:5001');	// remove before deploy
+//irebase.functions().useFunctionsEmulator('http://localhost:5001');	// remove before deploy
 const getStatement = async function(level) {
 	let token = localStorage.getItem("qid-token");
 	let statement;
@@ -47,7 +47,7 @@ firebase.auth().onAuthStateChanged(function(user)
 			showPage();
 			window.wait = setInterval(function() {
 				
-				var end = new Date("May 12, 2020 21:30:00").getTime();
+				var end = new Date("May 12, 2020 21:45:00").getTime();
 				var now = new Date().getTime();
 				var mrem = (end - now) / 60000;
 				var mrem = Math.abs(Math.round(mrem));
