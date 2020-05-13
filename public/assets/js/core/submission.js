@@ -16,11 +16,19 @@ window.addEventListener("DOMContentLoaded", event => {
 				let fileRef = storageRef.child('submissions/'+firebase.auth().currentUser.uid+'/'+new URLSearchParams(window.location.search).get('id')+'.txt');
 				fileRef.put(blob).then(snapshot => {
 					console.log("Upload Success!");
-				}).catch(e => { console.log(e); });
+				}).catch(e => { console.log(e); showErr(e); });
 				// current status : evaluating
 				syncWithDB();
 			}
-			fileINF.readAsText(fileinput);
+			if(fileinput instanceof Blob)
+			{
+				fileINF.readAsText(fileinput);
+			}
+			else
+			{
+				showPage();
+			}
+			
 		}
 });
 
@@ -61,6 +69,7 @@ firebase.auth().onAuthStateChanged((user) => {
     // .get().then(function(doc) {
 	// 	console.log("Current data: ", doc.data());
 		var currStat = localStorage.getItem("myscore");
+		if(!currStat) return;
 		currStat = JSON.parse(currStat);
 		let lvl = new URLSearchParams(window.location.search).get('id');
 		let state = currStat.output[lvl];

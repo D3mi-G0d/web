@@ -1,5 +1,5 @@
 const storage = firebase.storage();
-//irebase.functions().useFunctionsEmulator('http://localhost:5001');	// remove before deploy
+// firebase.functions().useFunctionsEmulator('http://localhost:5001');	// remove before deploy
 const getStatement = async function(level) {
 	let token = localStorage.getItem("qid-token");
 	let statement;
@@ -20,7 +20,7 @@ const getStatement = async function(level) {
 		statement = serverResp.data.data;
 		if(statement === "Unauthorised") throw new Error("Unauthorised");
 		statement.submission = {
-			input: await storage.refFromURL('gs://csbs-snu.appspot.com/dataset/'+firebase.auth().currentUser.uid+'/'+level+'.txt').getDownloadURL()
+			input: await storage.refFromURL('gs://csbs-snu.appspot.com/dataset/'+level+'/'+firebase.auth().currentUser.uid+'.txt').getDownloadURL()
 		};
 		localStorage.setItem(level,JSON.stringify(statement));
 		return statement;
@@ -68,6 +68,8 @@ firebase.auth().onAuthStateChanged(function(user)
 	}
 	else
 	{
+		showErr(new Error("Unauthorized!"));
+		
 		// user is unauthorised
 	}
 });

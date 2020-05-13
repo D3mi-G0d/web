@@ -19,11 +19,11 @@ firebase.auth().onAuthStateChanged(function(user){
 			<br>
 			<input type="submit" value="submit" id="src-sub" onclick="ps();">
 			`);
-			// window.location.href = '/postsubmission'
+			window.location.href = '/submissions'
 		}
 		else
 		{
-			// window.location.href = '/postsubmission'
+			window.location.href = '/submissions'
 			// redirect
 		}
 	}

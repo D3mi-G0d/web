@@ -7,11 +7,13 @@ window.addEventListener('DOMContentLoaded', e => {
 		updateBoard(snapshot.val());
 	}).catch(e => {
 		console.log(e);
+		showErr(e);
 	});
 });
 
-
-messaging.getToken().then(token => {
+setTimeout(() => {
+	messaging.getToken().then(token => {
+	document.getElementById("notif").remove();
 	console.log(token);
 	var leaderboardSub = firebase.functions().httpsCallable('subscribe');
 	if(localStorage.getItem("leader_sub") == null || localStorage.getItem("leader_sub") === "0")
@@ -21,6 +23,7 @@ messaging.getToken().then(token => {
 		console.log(result.data.data.status);
 		}).catch(e => {
 			console.log(e);
+			showErr(e);
 		});
 	}
 }).catch(e => {
@@ -28,7 +31,8 @@ messaging.getToken().then(token => {
 	// Notification aceess denied!
 	// show any custom warning
 	// if you want button click refresh, implement here
-	});
+});
+},3000);
 
 messaging.onTokenRefresh(() => {
 	messaging.getToken().then((refreshedToken) => {
@@ -41,6 +45,7 @@ messaging.onTokenRefresh(() => {
 		console.log(result.data.data.status);
 		}).catch(e => {
 			console.log(e);
+			showErr(e);
 		});
 	}
 	  // ...
@@ -85,6 +90,7 @@ document.getElementById("refresh_board").onclick = (e) => {
 		}).catch(e => {
 			showPage();
 			console.log(e);
+			showErr(e);
 		});
 	}
 	else

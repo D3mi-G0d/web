@@ -5,9 +5,9 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 // const serverTime = Date.now();
-const startTime = 1589291100;	// 12th May 7:15PM 2020 IST
+const startTime = new Date("2020-05-12 19:15+05:30").getTime();	// 12th May 7:15PM 2020 IST
 // const endTime = 1589300100;		// 12th May 9:45PM 2020 IST
-const endTime = new Date("2020-05-10 10:30+05:30").getTime();			// 10th May 10:30AM FOR TESTING! PLEASE DELETE
+const endTime = new Date("2020-05-12 21:45+05:30").getTime();			// 10th May 10:30AM FOR TESTING! PLEASE DELETE
 
 const pointTable = {
 	tetris: 1,
@@ -24,6 +24,7 @@ exports.submit = functions.storage.object().onFinalize(async (object) => {
 	const serverTime = new Date(timestamp).getTime();
 	const participants = admin.firestore().collection('participants');
 	let name = object.name.split("/");
+	if(serverTime < startTime) return null;
 	if(name[0] == 'submissions')
 	{
 		let uid = name[1].trim();

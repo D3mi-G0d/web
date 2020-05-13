@@ -3,7 +3,9 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 exports.postSubmit = functions.https.onCall( async (data, context) => {
-	if(context.auth.uid == '1bsf0a1bhONzXijY2KP8Di2FjP52' || context.auth.uid == 'LcvQuxLYYIdKCZgLDEjMQ9K6dOz1')	// testing access
+	const startTime = 1589291100;
+	const now = Date.now();
+	if(context.auth && startTime < now)
 	{
 		const participants = admin.firestore().collection('participants');
 		let userDoc = await participants.doc(context.auth.uid).get();

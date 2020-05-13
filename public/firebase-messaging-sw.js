@@ -8,7 +8,7 @@ messaging.setBackgroundMessageHandler(function(payload) {
 	console.log('[firebase-messaging-sw.js] Received background message ', payload);
 	const notificationTitle = '#!SHEBANG Leaderboard';
 	const notificationOptions = {
-	  body: "Heighest Score : "+JSON.parse(payload.data.leads).score[0],
+	  body: "Highest Score : "+JSON.parse(payload.data.leads).score[0],
 	};
 	const promiseChain = clients.matchAll({
 		type: 'window',

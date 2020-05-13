@@ -1,3 +1,4 @@
+localStorage.setItem("sb-ver","May 2020");
 try
 {
 	firebase.analytics();
@@ -78,4 +79,10 @@ function showLoad()
 function showPage() {
 	document.getElementById("loader").style.display = "none";
 	document.getElementById("wrapper").style.display = "block";
+}
+
+
+function showErr(e)
+{
+	let err = `<p id="warn" style="color: brown;">`+e.toString()+`</p>`;
 }
