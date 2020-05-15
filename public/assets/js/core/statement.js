@@ -47,7 +47,7 @@ firebase.auth().onAuthStateChanged(function(user)
 			showPage();
 			window.wait = setInterval(function() {
 				
-				var end = new Date("May 12, 2020 21:45:00").getTime();
+				var end = new Date("May 17, 2020 21:45:00").getTime();
 				var now = new Date().getTime();
 				var mrem = (end - now) / 60000;
 				var mrem = Math.abs(Math.round(mrem));
@@ -76,7 +76,7 @@ firebase.auth().onAuthStateChanged(function(user)
 
 function updateScore(statement)
 {
-	var end = new Date("May 12, 2020 21:30:00").getTime();
+	var end = new Date("May 17, 2020 21:30:00").getTime();
 	var now = new Date().getTime();
 	var mrem = (end - now) / 60000;
 	var mrem = Math.abs(Math.round(mrem));

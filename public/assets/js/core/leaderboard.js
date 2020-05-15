@@ -32,7 +32,7 @@ setTimeout(() => {
 	// show any custom warning
 	// if you want button click refresh, implement here
 });
-},3000);
+},3500);
 
 messaging.onTokenRefresh(() => {
 	messaging.getToken().then((refreshedToken) => {

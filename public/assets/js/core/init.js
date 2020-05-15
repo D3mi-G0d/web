@@ -70,10 +70,11 @@ if(window.location.pathname == '/problem-statements')
 
 
 
-function showLoad()
+function showLoad(msg="")
 {
 	document.getElementById("loader").style.display = "";
 	document.getElementById("wrapper").style.display = "";
+	document.getElementById("loadtxt").innerText = msg;
 }
 
 function showPage() {
