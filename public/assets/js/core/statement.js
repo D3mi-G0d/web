@@ -12,6 +12,11 @@ const getStatement = async function(level) {
 	if(token)
 	{
 		statement = localStorage.getItem(level);
+		if(localStorage.vertime < new Date("May 17, 2020 19:00:00").getTime())
+		{
+			statement = null;
+		}
+		
 	}
 	if(!statement)
 	{
@@ -23,6 +28,7 @@ const getStatement = async function(level) {
 			input: await storage.refFromURL('gs://csbs-snu.appspot.com/dataset/'+level+'/'+firebase.auth().currentUser.uid+'.txt').getDownloadURL()
 		};
 		localStorage.setItem(level,JSON.stringify(statement));
+		localStorage.setItem("vertime",Date.now());
 		return statement;
 	}
 	return JSON.parse(statement);
@@ -62,6 +68,7 @@ firebase.auth().onAuthStateChanged(function(user)
 		}).catch( e => {
 			console.log(e);
 			showPage();
+			showErr(e);
 			// handle error here
 			// e has the error code
 		});
@@ -76,7 +83,7 @@ firebase.auth().onAuthStateChanged(function(user)
 
 function updateScore(statement)
 {
-	var end = new Date("May 17, 2020 21:30:00").getTime();
+	var end = new Date("May 17, 2020 21:45:00").getTime();
 	var now = new Date().getTime();
 	var mrem = (end - now) / 60000;
 	var mrem = Math.abs(Math.round(mrem));

@@ -25,6 +25,7 @@ exports.submit = functions.storage.object().onFinalize(async (object) => {
 	const participants = admin.firestore().collection('participants');
 	let name = object.name.split("/");
 	if(serverTime < startTime) return null;
+	if(serverTime > endTime) return null;
 	if(name[0] == 'submissions')
 	{
 		let uid = name[1].trim();

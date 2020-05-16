@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", event => {
 		document.getElementById("submbtn").onclick = function() {
-			showLoad();
+			showLoad("UPLOADING");
 			// TODO: Add loading animation
 			// OR: show status in the button. Current Status : processing...
 			const fileinput = document.getElementById("fileinput").files[0];
@@ -18,6 +18,7 @@ window.addEventListener("DOMContentLoaded", event => {
 					console.log("Upload Success!");
 				}).catch(e => { console.log(e); showErr(e); });
 				// current status : evaluating
+				document.getElementById("loadtxt").innerText = "EVALUATING";
 				syncWithDB();
 			}
 			if(fileinput instanceof Blob)
