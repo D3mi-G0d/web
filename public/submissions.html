@@ -72,7 +72,7 @@
                                 
                                 <p style="text-align: center;">Tell us what you think, this will only take a minute.</p>
 
-                                <div class="box">
+                                <div class="box" id="sbox">
 
                                     <p><b>#!</b> Did you enjoyed the contest?</p>
                                         <div class="col-12-large">
@@ -89,19 +89,19 @@
                                     <p><b>#!</b> How would you rate the questions?</p>
                                     <div style="text-align: left;">
                                         <div class="col-4 col-12-small">
-                                            <input type="radio" id="rate-ques-tooeasy" name="rate-ques">
+                                            <input type="radio" id="rate-ques-tooeasy" name="rate-ques" value="Easy">
                                             <label for="rate-ques-tooeasy">Easy</label>
                                         </div>
                                         <div class="col-4 col-12-small">
-                                            <input type="radio" id="rate-ques-easy" name="rate-ques" checked>
+                                            <input type="radio" id="rate-ques-easy" name="rate-ques" value="Standard" checked>
                                             <label for="rate-ques-easy">Standard</label>
 										</div>
 										<div class="col-4 col-12-small">
-                                            <input type="radio" id="rate-ques-hard" name="rate-ques">
+                                            <input type="radio" id="rate-ques-hard" name="rate-ques" value="Challenging">
                                             <label for="rate-ques-hard">Challenging</label>
                                         </div>
                                         <div class="col-4 col-12-small">
-                                            <input type="radio" id="rate-ques-toohard" name="rate-ques">
+                                            <input type="radio" id="rate-ques-toohard" name="rate-ques" value="Too Hard">
                                             <label for="rate-ques-toohard">Too Hard</label>
                                         </div>
                                     </div>
@@ -111,15 +111,15 @@
                                     <p><b>#!</b> Were the rules engaging?</p>
                                         <div style="text-align: left;">
                                             <div class="col-4 col-12-small">
-												<input type="radio" id="rate-rule-y" name="rate-rule">
+												<input type="radio" id="rate-rule-y" name="rate-rule" value="Yes">
 												<label for="rate-rule-y">Yes</label>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="rate-rule-m" name="rate-rule" checked>
+												<input type="radio" id="rate-rule-m" name="rate-rule" value="Maybe" checked>
 												<label for="rate-rule-m">Maybe</label>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="rate-rule-n" name="rate-rule">
+												<input type="radio" id="rate-rule-n" name="rate-rule" value="No">
 												<label for="rate-rule-n">No</label>
 											</div>
                                         </div>
@@ -135,7 +135,7 @@
 
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" value="Send Review" class="primary" /></li>
+                                            <li><input type="submit" value="Send Review" class="primary" id="rvusubmit"/></li>
                                         </ul>
                                     </div>
 
@@ -208,6 +208,38 @@
 			<!-- Initialize Firebase -->
 			<script src="/__/firebase/init.js"></script>
 			<!-- Core  modules -->
-            <script src="assets/js/core/init.js"></script>
+			<script src="assets/js/core/init.js"></script>
+			<script>
+				document.getElementById("rvusubmit").addEventListener('click',() => {
+					const rate = document.getElementById("rate-contest").value;
+					let rq;
+					let engage;
+					let rbs;
+					rbs = document.querySelectorAll('input[name="rate-ques"]');
+					for (const rb of rbs) {
+						if (rb.checked) {
+							rq = rb.value;
+							break;
+						}
+					}
+
+					rbs = document.querySelectorAll('input[name="rate-rule"]');
+					for (const rb of rbs) {
+						if (rb.checked) {
+							engage = rb.value;
+							break;
+						}
+					}
+
+					const cmnt = document.getElementById("demo-message").value;
+
+					fetch('https://docs.google.com/forms/d/e/1FAIpQLSdWdshrdXux7udAXcVNsmxzHjlyNB4kJYFK7fvgDMJck94zzA/formResponse?entry.1979248348='+firebase.auth().currentUser.email+'&entry.2003028362='+rate+'&entry.15026318='+rq+'&entry.1097534252='+engage+'&entry.1106772826='+cmnt+'&submit=SUBMIT').then(r => {
+						document.getElementById("sbox").remove();
+					}).catch(e => {
+						document.getElementById("sbox").remove();
+					});
+				});
+
+			</script>
 	</body>
 </html>

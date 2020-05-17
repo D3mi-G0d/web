@@ -198,12 +198,12 @@
 		var mrem = updateScore();
 		if (mrem < 0) {
 			clearInterval(wait);
-			document.getElementById("srem").innerHTML = "EXPIRED";
+			document.getElementById("srem").innerHTML = "0";
 		}
 	}, 60 * 1000);
 	function updateScore()
 	{
-		var end = new Date("May 12, 2020 21:45:00").getTime();
+		var end = new Date("May 17, 2020 21:45:00").getTime();
 		var now = new Date().getTime();
 		var mrem = (end - now) / 60000;
 		var mrem = Math.abs(Math.round(mrem));
@@ -302,6 +302,12 @@
 			<!-- Initialize Firebase -->
 			<script src="/__/firebase/init.js"></script>
 			<!-- Core  modules -->
+			<script>
+				if(new Date("May 17, 2020 19:00:00").getTime() > new Date().getTime())
+				{
+					window.location.href = '/coming';
+				}
+			</script>
 			<script src="assets/js/core/init.js"></script>
 			<script src="assets/js/core/postSubmission.js"></script>
 	</body>
