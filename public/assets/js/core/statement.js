@@ -1,3 +1,4 @@
+window.enb = 0;
 const storage = firebase.storage();
 // firebase.functions().useFunctionsEmulator('http://localhost:5001');	// remove before deploy
 const getStatement = async function(level) {
@@ -34,6 +35,12 @@ const getStatement = async function(level) {
 	return JSON.parse(statement);
 }
 
+if(Date.now() < new Date("May 17, 2020 19:15:00").getTime())
+{
+	document.getElementById("sub_input").classList.add("disabled");
+	document.getElementById("myBtn").classList.add("disabled");
+	window.enb = 1
+}
 firebase.auth().onAuthStateChanged(function(user)
 {
 	if(user)
@@ -52,7 +59,12 @@ firebase.auth().onAuthStateChanged(function(user)
 			updateScore(statement);
 			showPage();
 			window.wait = setInterval(function() {
-				
+				if(window.enb && (Date.now() > new Date("May 17, 2020 19:15:00").getTime()))
+				{
+					document.getElementById("sub_input").classList.remove("disabled");
+					document.getElementById("myBtn").classList.remove("disabled");
+					window.enb = 0;
+				}
 				var end = new Date("May 17, 2020 21:45:00").getTime();
 				var now = new Date().getTime();
 				var mrem = (end - now) / 60000;
