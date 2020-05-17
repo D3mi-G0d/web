@@ -63,6 +63,7 @@ firebase.auth().onAuthStateChanged(function(user)
 				{
 					document.getElementById("sub_input").classList.remove("disabled");
 					document.getElementById("myBtn").classList.remove("disabled");
+					alert("You can now start downloading input file & upload output file");
 					window.enb = 0;
 				}
 				var end = new Date("May 17, 2020 21:45:00").getTime();
