@@ -3,7 +3,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 exports.postSubmit = functions.https.onCall( async (data, context) => {
-	const startTime = 1589291100;
+	const startTime = new Date("2020-05-17 18:15+05:30").getTime();
 	const now = Date.now();
 	if(context.auth && startTime < now)
 	{

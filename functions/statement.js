@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 // const cors = require('cors')({origin: true});
 
 exports.statement = functions.https.onCall((data, context) => {
-	const startTime = new Date("2020-05-17 19:00+05:30").getTime();
+	const startTime = new Date("2020-05-17 18:15+05:30").getTime();
 	const now = Date.now();
 	if(context.auth && startTime < now)	// testing access
 	{

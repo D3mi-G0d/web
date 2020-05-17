@@ -13,7 +13,7 @@ const getStatement = async function(level) {
 	if(token)
 	{
 		statement = localStorage.getItem(level);
-		if(localStorage.vertime < new Date("May 17, 2020 19:00:00").getTime())
+		if(localStorage.vertime < new Date("May 17, 2020 18:15:00").getTime())
 		{
 			statement = null;
 		}
@@ -35,7 +35,7 @@ const getStatement = async function(level) {
 	return JSON.parse(statement);
 }
 
-if(Date.now() < new Date("May 17, 2020 19:15:00").getTime())
+if(Date.now() < new Date("May 17, 2020 18:16:00").getTime())
 {
 	document.getElementById("sub_input").classList.add("disabled");
 	document.getElementById("myBtn").classList.add("disabled");

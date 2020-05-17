@@ -5,9 +5,9 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 // const serverTime = Date.now();
-const startTime = new Date("2020-05-17 19:15+05:30").getTime();	// 12th May 7:15PM 2020 IST
+const startTime = new Date("2020-05-17 18:16+05:30").getTime();	// 12th May 7:15PM 2020 IST
 // const endTime = 1589300100;		// 12th May 9:45PM 2020 IST
-const endTime = new Date("2020-05-17 21:45+05:30").getTime();			// 10th May 10:30AM FOR TESTING! PLEASE DELETE
+const endTime = new Date("2020-05-17 18:30+05:30").getTime();			// 10th May 10:30AM FOR TESTING! PLEASE DELETE
 
 const pointTable = {
 	tetris: 1,
