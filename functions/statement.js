@@ -35,7 +35,7 @@ exports.statement = functions.https.onCall((data, context) => {
 			<p><span>The first of the input file contains T, total number of test cases. Followed by T lines, each line containing 2 integers, M &amp; N, number of rows and columns.&nbsp;</span></p>
 			<p><span>Output:</span></p>
 			<p><span>The output file must contain a single string of SPACE SEPARATED integers indicating the maximum number of HITS possible, for all the test cases.</span></p>
-			<img style="width: 70%; height: 70%; margin: auto;" class="image main" src="images/tetris.gif" alt=""/>
+			<img style="width: 70%; height: 70%; margin: auto;" class="image main" src="images/tetris.webp" alt=""/>
 			`;
 			score = 1;
 			sample.input = `
